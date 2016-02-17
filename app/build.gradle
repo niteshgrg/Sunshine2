@@ -4,6 +4,8 @@ android {
     compileSdkVersion 22
     buildToolsVersion "23.0.0"
 
+    apply plugin: 'com.google.gms.google-services'
+
     defaultConfig {
         applicationId "com.example.android.sunshine.app"
         minSdkVersion 10
@@ -22,4 +24,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.github.bumptech.glide:glide:3.5.2'
 }

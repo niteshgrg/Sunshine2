@@ -32,6 +32,8 @@ public class WeatherContract {
     // device.
     public static final String CONTENT_AUTHORITY = "com.example.android.sunshine.app";
 
+    public static final String API_KEY = "95f246a245189c5747324bd0b52fb126";
+
     // Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact
     // the content provider.
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
