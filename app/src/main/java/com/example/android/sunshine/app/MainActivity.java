@@ -78,7 +78,6 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
 
             boolean sentToken = sharedPreferences.getBoolean(SENT_TOKEN_TO_SERVER, false);
             if (!sentToken) {
-                Log.e(LOG_TAG, "registration");
                 Intent intent = new Intent(this, RegistrationIntentService.class);
                 startService(intent);
             }
@@ -127,7 +126,6 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
 
 
             }
-        Log.e(LOG_TAG, "hello");
     }
 
     @Override

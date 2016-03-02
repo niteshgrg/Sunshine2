@@ -17,13 +17,9 @@ import com.google.android.gms.iid.InstanceID;
 public class RegistrationIntentService extends IntentService {
 
     public static final String TAG = "RegIntentService";
-    private final String LOG_TAG = MainActivity.class.getSimpleName();
-    ;
-
 
     public RegistrationIntentService() {
         super(TAG);
-        Log.e(LOG_TAG, "regintentservice");
     }
 
     @Override
@@ -31,14 +27,11 @@ public class RegistrationIntentService extends IntentService {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        Log.e(LOG_TAG, "regintentservice");
-
         try {
             synchronized (TAG) {
                 InstanceID instanceID = InstanceID.getInstance(this);
 
                 String senderId = getString(R.string.gcm_defaultSenderId);
-                Log.e(LOG_TAG, "sender id:" + senderId);
                 if (senderId.length() != 0) {
                     String token = instanceID.getToken(senderId,
                             GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);

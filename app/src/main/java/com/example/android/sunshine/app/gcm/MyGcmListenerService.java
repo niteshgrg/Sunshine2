@@ -1,5 +1,6 @@
 package com.example.android.sunshine.app.gcm;
 
+import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -25,11 +26,18 @@ public class MyGcmListenerService extends GcmListenerService {
     private static final String EXTRA_DATA = "data";
     private static final String EXTRA_WEATHER = "weather";
     private static final String EXTRA_LOCATION = "location";
+    private final String LOG_TAG = "GcmListener-trial";
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.e(LOG_TAG, "Listener service started");
+    }
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
 
-        Log.e(TAG, "data empty");
+        Log.e(LOG_TAG, "data empty");
         if (!data.isEmpty()) {
             String senderId = getString(R.string.gcm_defaultSenderId);
 
@@ -37,13 +45,13 @@ public class MyGcmListenerService extends GcmListenerService {
                 Toast.makeText(this, "SenderID string needs to be set", Toast.LENGTH_LONG).show();
             }
             if ((senderId).equals(from)) {
+                Log.e(TAG, "hey");
                 String weather = data.getString(EXTRA_WEATHER);
                 String location = data.getString(EXTRA_LOCATION);
                 String alert = String.format(getString(R.string.gcm_weather_alert), weather, location);
 
                 sendNotification(alert);
             }
-
             Log.i(TAG, "Received: " + data.toString());
         }
     }
@@ -69,6 +77,16 @@ public class MyGcmListenerService extends GcmListenerService {
                         .setPriority(NotificationCompat.PRIORITY_HIGH);
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+    }
+
+    public boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
