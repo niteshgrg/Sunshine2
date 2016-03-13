@@ -78,4 +78,3 @@ public class MyGcmListenerService extends GcmListenerService {
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 }
-
